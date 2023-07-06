@@ -1,13 +1,15 @@
-import { PlayCircleOutlined } from "@ant-design/icons";
 import "./App.css";
-import { Button } from "antd";
+import { Col } from "antd";
+import { Searcher } from "./components/Searcher";
+import { PokemonList } from "./components/PokemonList";
 
 function App() {
   return (
     <div className="App">
-      <p>Pokedux</p>
-      <Button type="primary">Button</Button>
-      <PlayCircleOutlined />
+      <Col span={8} offset={8}>
+        <Searcher />
+      </Col>
+      <PokemonList />
     </div>
   );
 }
