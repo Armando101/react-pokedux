@@ -3,14 +3,16 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 
-export const PokemonCard = () => {
+export const PokemonCard = ({ name, url }) => {
   return (
     <Card
-      title="Ditto"
+      title={name}
       cover={
         <img
-          src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/132.png"
-          alt="Ditto"
+          src={
+            "https://assets.pokemon.com/assets/cms2/img/pokedex/full/132.png"
+          }
+          alt={name}
         />
       }
       extra={<StarOutlined />}
