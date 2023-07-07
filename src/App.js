@@ -5,11 +5,13 @@ import { PokemonList } from "./components/PokemonList";
 import logo from "./statics/logo.svg";
 import { useEffect, useRef } from "react";
 import { getPokemon } from "./api";
-import { connect } from "react-redux";
-import { setPokemonsActions } from "./actions";
+import { useDispatch, useSelector } from "react-redux";
+import { setPokemons } from "./actions";
 
-function App({ pokemons, setPokemons }) {
-  console.log(pokemons, setPokemons);
+function App() {
+  const pokemons = useSelector((state) => state.pokemons);
+  const dispatcher = useDispatch();
+
   const dataFetchedRef = useRef(false);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ function App({ pokemons, setPokemons }) {
 
     const fetchPokemons = async () => {
       const pokemonsRes = await getPokemon();
-      setPokemons(pokemonsRes);
+      dispatcher(setPokemons(pokemonsRes));
     };
 
     fetchPokemons();
@@ -37,12 +39,4 @@ function App({ pokemons, setPokemons }) {
   );
 }
 
-// Recibe el state y retorna un objeto cuyas propiedades serán enviadas a los props del componente que se está conectado a redux
-const mapStateToProps = (state) => ({ pokemons: state.pokemons });
-
-// Es una función que recibe el dispatcher de redux y retorna un objeto que será mapedo a las propiedades con los action creatrors
-const mapDispatchToProps = (dispach) => ({
-  setPokemons: (value) => dispach(setPokemonsActions(value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
