@@ -5,7 +5,7 @@ import "./PokemonList.css";
 export const PokemonList = ({ pokemons }) => {
   return (
     <div className="PokemonList">
-      {pokemons.map((pokemon, index) => (
+      {pokemons?.map((pokemon, index) => (
         <PokemonCard {...pokemon} key={index} />
       ))}
     </div>
