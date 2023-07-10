@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import thunk from "redux-thunk";
 import "./index.css";
 import {
   applyMiddleware,
@@ -9,14 +10,12 @@ import {
 import App from "./App";
 import { pokemonsReducer } from "./reducers/pokemons";
 import { Provider } from "react-redux";
-import { addCustomPokenmon, logger } from "./middlewares";
+import { logger } from "./middlewares";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const composedEnhancers = compose(
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(addCustomPokenmon, logger)
-);
+const composedEnhancers = composeAlt(applyMiddleware(thunk, logger));
 
 const store = createStore(pokemonsReducer, composedEnhancers);
 
