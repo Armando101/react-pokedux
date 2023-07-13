@@ -5,11 +5,15 @@ import { PokemonList } from "./components/PokemonList";
 import logo from "./statics/logo.svg";
 import { useEffect, useRef } from "react";
 import { getPokemon } from "./api";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getPokemonWithDetails } from "./actions";
 
 function App() {
-  const { pokemons, loading } = useSelector((state) => state);
+  const { data, ui } = useSelector((state) => state, shallowEqual);
+
+  const pokemons = data?.pokemons;
+  const loading = ui?.loading;
+
   const dispatcher = useDispatch();
 
   const dataFetchedRef = useRef(false);
