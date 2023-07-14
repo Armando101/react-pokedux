@@ -11,7 +11,7 @@ import { getPokemonWithDetails } from "./actions";
 function App() {
   const { data, ui } = useSelector((state) => state, shallowEqual);
 
-  const pokemons = data?.pokemons;
+  const pokemons = data?.filteredPokemons;
   const loading = ui?.loading;
 
   const dispatcher = useDispatch();
